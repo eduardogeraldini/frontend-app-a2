@@ -7,7 +7,7 @@ import { Feather } from "@expo/vector-icons";
 import { Image, TouchableOpacity } from "react-native";
 
 import Profile from "../pages/Profile";
-import Initial from "../pages/Initial";
+//import Profile from "../pages/Initial";
 
 import logo from "../assets/logo.png";
 
@@ -21,7 +21,7 @@ const InitialStackScreen = () => (
     <AppStack.Screen
       name="Initial"
       options={{ title: "Initial" }}
-      component={Initial}
+      component={Profile}
     />
   </AppStack.Navigator>
 );
