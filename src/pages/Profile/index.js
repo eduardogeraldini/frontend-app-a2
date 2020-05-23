@@ -58,6 +58,7 @@ export default function Profile() {
 
   return (
     <View style={styles.container}>
+
       <View style={styles.userContainer}>
         <Image
           source={{
@@ -73,39 +74,11 @@ export default function Profile() {
         <Text style={styles.description}>Pacient</Text>
       </View>
 
-      <View style={{ marginHorizontal: 20, marginTop: 20 }}>
-        <Text style={{ fontWeight: "bold", color: "#8A8284" }}>Nome</Text>
+      <View style={styles.inputContainer}>
+        <Text style={styles.inputLabel}>Nome</Text>
         <TextInput
           placeholder="Ex: João"
-          style={{
-            height: 40,
-            borderColor: "#8A8284",
-            borderBottomWidth: 1,
-          }}
-        />
-      </View>
-
-      <View style={{ marginHorizontal: 20, marginTop: 20 }}>
-        <Text style={{ fontWeight: "bold", color: "#8A8284" }}>Sobrenome</Text>
-        <TextInput
-          placeholder="Ex: Silva"
-          style={{
-            height: 40,
-            borderColor: "#8A8284",
-            borderBottomWidth: 1,
-          }}
-        />
-      </View>
-
-      <View style={{ marginHorizontal: 20, marginTop: 20 }}>
-        <Text style={{ fontWeight: "bold", color: "#8A8284" }}>E-Mail</Text>
-        <TextInput
-          placeholder="Ex: email@email.com"
-          style={{
-            height: 40,
-            borderColor: "#8A8284",
-            borderBottomWidth: 1,
-          }}
+          style={styles.inputText}
         />
       </View>
 
