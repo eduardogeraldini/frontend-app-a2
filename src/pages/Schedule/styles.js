@@ -59,7 +59,7 @@ export default StyleSheet.create({
     marginLeft: 10,
   },
   doctorDescriptionBodyNextSchedule: {
-    color: "#555",
+    color: "#F9896B",
     marginLeft: 10,
   },
   footerTextNextSchedule: {

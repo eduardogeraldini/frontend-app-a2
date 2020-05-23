@@ -31,7 +31,7 @@ export default function Consult() {
 
             <View style={styles.cardRightSide}>
               <TouchableOpacity style={styles.iconContainer}>
-                <Feather name="arrow-right-circle" size={25} color="#4F46BA" />
+                <Feather name="arrow-right" size={25} color="#4F46BA" />
                 <Text style={styles.textIcon}>Agendar</Text>
               </TouchableOpacity>
             </View>

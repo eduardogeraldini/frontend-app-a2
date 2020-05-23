@@ -36,14 +36,16 @@ export default function Schedule() {
               </Text>
             </View>
           </View>
-          <Feather name="phone-call" color="#F9896B" size={25} />
-        </View>
-          <TouchableOpacity style={styles.footerNextSchedule}>
-            <Text style={styles.footerTextNextSchedule}>
-              Ver mais informações
-            </Text>
-            <Feather name="arrow-righ" size={15} color="#F9896B" />
+          <TouchableOpacity>
+            <Feather name="phone-call" color="#F9896B" size={25} />
           </TouchableOpacity>
+        </View>
+        <TouchableOpacity style={styles.footerNextSchedule}>
+          <Text style={styles.footerTextNextSchedule}>
+            Ver mais informações
+          </Text>
+          <Feather name="arrow-right" size={15} color="#F9896B" />
+        </TouchableOpacity>
       </View>
 
       <Text style={styles.title}>Todas as consultas</Text>

@@ -18,7 +18,7 @@ export default StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginVertical: 5,
-    height: 100,
+    height: 80,
     marginHorizontal: 20,
     paddingHorizontal: 10,
     borderRadius: 10,
@@ -38,8 +38,8 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
   doctorAvatar: {
-    height: 60,
-    width: 60,
+    height: 50,
+    width: 50,
     borderRadius: 15,
   },
   textContainer: {
@@ -51,7 +51,7 @@ export default StyleSheet.create({
     color: '#555'
   },
   doctorDescription: {
-    color: "#555",
+    color: "#F9896B",
   },
   iconContainer: {
     marginRight: 10,
@@ -61,6 +61,6 @@ export default StyleSheet.create({
   textIcon: {
     color: "#4F46BA",
     fontWeight: "bold",
-    fontSize: 12,
+    fontSize: 10,
   },
 });
