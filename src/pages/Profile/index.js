@@ -14,6 +14,8 @@ import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 
+import api from '../../services/api';
+
 import styles from "./styles";
 
 export default function Profile() {
@@ -23,15 +25,15 @@ export default function Profile() {
   const navigation = useNavigation();
 
 
-  async function listAll(){
-    let apiUrl = 'http://192.168.15.13:3000/users';
-
-    let options = {
-      method: 'GET',
-    };
-
-    const res = await fetch(apiUrl, options);
-    console.log(res.json())
+  async function listAll() {
+    api.get('/users')
+      .then(function (response) {
+        console.log(response.data);
+        console.log(response.status);
+        console.log(response.statusText);
+        console.log(response.headers);
+        console.log(response.config);
+      });
   }
 
   async function _pickImage() {
@@ -81,30 +83,19 @@ export default function Profile() {
 
       if (!pickerResult.cancelled) {
         uploadResponse = await uploadImageAsync(pickerResult.uri);
-        uploadResult = await uploadResponse.json();
-
-        setImage(uploadResult.location)
+        if(uploadResponse.status === 200) {
+          alert('Foto alterada com sucesso')
+        }
       }
     } catch (e) {
       console.log({ uploadResponse });
-      console.log({ uploadResult });
       console.log(e);
-      alert('Upload failed, sorry :(');
+      alert('Erro ao salvar imagem no banco de dados:(');
     }
   };
 
 
   async function uploadImageAsync(uri) {
-    let apiUrl = 'http://192.168.15.13:3000/users';
-
-    // Note:
-    // Uncomment this if you want to experiment with local server
-    //
-    // if (Constants.isDevice) {
-    //   apiUrl = `https://your-ngrok-subdomain.ngrok.io/upload`;
-    // } else {
-    //   apiUrl = `http://localhost:3000/upload`
-    // }
 
     let uriParts = uri.split('.');
     let fileType = uriParts[uriParts.length - 1];
@@ -116,21 +107,20 @@ export default function Profile() {
       name: `photo.${fileType}`,
       type: `image/${fileType}`,
     });
-    formData.append('first_name', 'marlon')
-    formData.append('last_name', 'englemam')
-    formData.append('email', 'englemam@gmail.com')
+    formData.append('first_name', 'claire')
+    formData.append('last_name', 'bennet')
+    formData.append('email', 'bennet@gmail.com')
     formData.append('password', '333333')
 
 
     let options = {
-      method: 'POST',
-      body: formData,
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     };
 
-    return await fetch(apiUrl, options);
+    return await api.post('/users', formData, options)
+    
   }
 
   return (
