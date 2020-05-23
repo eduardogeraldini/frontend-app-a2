@@ -21,7 +21,7 @@ export default StyleSheet.create({
     height: 100,
     marginHorizontal: 20,
     paddingHorizontal: 10,
-    borderRadius: 5,
+    borderRadius: 10,
     backgroundColor: "#FFF",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
@@ -62,6 +62,5 @@ export default StyleSheet.create({
     color: "#4F46BA",
     fontWeight: "bold",
     fontSize: 12,
-    
   },
 });
