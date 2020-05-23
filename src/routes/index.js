@@ -7,7 +7,9 @@ import { Feather } from "@expo/vector-icons";
 import { Image, TouchableOpacity } from "react-native";
 
 import Profile from "../pages/Profile";
-import Initial from "../pages/Initial";
+import Historic from "../pages/Historic";
+import Schedule from "../pages/Schedule";
+import Consult from "../pages/Consult";
 
 import logo from "../assets/logo.png";
 
@@ -57,6 +59,99 @@ const ProfileStackScreen = () => (
   </AppStack.Navigator>
 );
 
+const HistoricStackScreen = () => (
+  <AppStack.Navigator
+    screenOptions={{
+      headerBackTitleVisible: false,
+      headerLeft: () => (
+        <Image
+          source={logo}
+          style={{ width: 130, height: 25, marginLeft: 20 }}
+          resizeMode="contain"
+        />
+      ),
+      headerRight: () => (
+        <TouchableOpacity onPress={() => alert("Sair")}>
+          <Feather
+            name="log-out"
+            size={25}
+            color="#F9896B"
+            style={{ marginRight: 20 }}
+          />
+        </TouchableOpacity>
+      ),
+    }}
+  >
+    <AppStack.Screen
+      name="Historic"
+      options={{ headerTitle: "" }}
+      component={Historic}
+    />
+  </AppStack.Navigator>
+);
+
+const ScheduleStackScreen = () => (
+  <AppStack.Navigator
+    screenOptions={{
+      headerBackTitleVisible: false,
+      headerLeft: () => (
+        <Image
+          source={logo}
+          style={{ width: 130, height: 25, marginLeft: 20 }}
+          resizeMode="contain"
+        />
+      ),
+      headerRight: () => (
+        <TouchableOpacity onPress={() => alert("Sair")}>
+          <Feather
+            name="log-out"
+            size={25}
+            color="#F9896B"
+            style={{ marginRight: 20 }}
+          />
+        </TouchableOpacity>
+      ),
+    }}
+  >
+    <AppStack.Screen
+      name="Schedule"
+      options={{ headerTitle: "" }}
+      component={Schedule}
+    />
+  </AppStack.Navigator>
+);
+
+const ConsultStackScreen = () => (
+  <AppStack.Navigator
+    screenOptions={{
+      headerBackTitleVisible: false,
+      headerLeft: () => (
+        <Image
+          source={logo}
+          style={{ width: 130, height: 25, marginLeft: 20 }}
+          resizeMode="contain"
+        />
+      ),
+      headerRight: () => (
+        <TouchableOpacity onPress={() => alert("Sair")}>
+          <Feather
+            name="log-out"
+            size={25}
+            color="#F9896B"
+            style={{ marginRight: 20 }}
+          />
+        </TouchableOpacity>
+      ),
+    }}
+  >
+    <AppStack.Screen
+      name="Consult"
+      options={{ headerTitle: "" }}
+      component={Consult}
+    />
+  </AppStack.Navigator>
+);
+
 const TabsNavigation = () => (
   <Tabs.Navigator
     tabBarOptions={{
@@ -69,7 +164,7 @@ const TabsNavigation = () => (
   >
     <Tabs.Screen
       name="Agenda"
-      component={ProfileStackScreen}
+      component={ScheduleStackScreen}
       options={{
         tabBarLabel: "Agenda",
         tabBarIcon: ({ size, color }) => (
@@ -79,7 +174,7 @@ const TabsNavigation = () => (
     />
     <Tabs.Screen
       name="Historico"
-      component={ProfileStackScreen}
+      component={HistoricStackScreen}
       options={{
         tabBarLabel: "Histórico",
         tabBarIcon: ({ size, color }) => (
@@ -89,7 +184,7 @@ const TabsNavigation = () => (
     />
     <Tabs.Screen
       name="Consultar"
-      component={ProfileStackScreen}
+      component={ConsultStackScreen}
       options={{
         tabBarLabel: "Consultar-se",
         tabBarIcon: ({ size, color }) => (
