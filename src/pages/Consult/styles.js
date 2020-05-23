@@ -8,8 +8,9 @@ export default StyleSheet.create({
   title: {
     marginHorizontal: 20,
     marginTop: 20,
+    marginBottom: 10,
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: 18,
     color: "#666",
   },
   card: {
@@ -45,7 +46,7 @@ export default StyleSheet.create({
     marginLeft: 10,
   },
   doctorName: {
-    fontSize: 18,
+    fontSize: 15,
     fontWeight: "bold",
     color: '#555'
   },
@@ -53,12 +54,14 @@ export default StyleSheet.create({
     color: "#555",
   },
   iconContainer: {
-    marginRight: 20,
+    marginRight: 10,
     flexDirection: "column",
     alignItems: "center",
   },
   textIcon: {
     color: "#4F46BA",
     fontWeight: "bold",
+    fontSize: 12,
+    
   },
 });
