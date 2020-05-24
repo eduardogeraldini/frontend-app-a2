@@ -19,7 +19,9 @@ export default function Consult() {
             <View style={styles.cardLeftSide}>
               <Image
                 source={{
-                  uri: "https://api.adorable.io/avatars/285/4.png",
+                  uri: `https://api.adorable.io/avatars/285/${
+                    Math.random() * 100
+                  }.png`,
                 }}
                 style={styles.doctorAvatar}
               />

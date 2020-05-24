@@ -23,7 +23,7 @@ export default function Schedule() {
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Image
               source={{
-                uri: "https://api.adorable.io/avatars/285/4.png",
+                uri: "https://api.adorable.io/avatars/285/5.png",
               }}
               style={styles.avatarBodyNextSchedule}
             />
@@ -37,24 +37,48 @@ export default function Schedule() {
             </View>
           </View>
           <TouchableOpacity>
-            <Feather name="phone-call" color="#F9896B" size={25} />
+            <Feather name="phone-call" color="#4F46BA" size={25} />
           </TouchableOpacity>
         </View>
         <TouchableOpacity style={styles.footerNextSchedule}>
           <Text style={styles.footerTextNextSchedule}>
             Ver mais informações
           </Text>
-          <Feather name="arrow-right" size={15} color="#F9896B" />
+          <Feather name="arrow-right" size={15} color="#4F46BA" />
         </TouchableOpacity>
       </View>
 
-      <Text style={styles.title}>Todas as consultas</Text>
+      <Text style={styles.title}>Consultas em aberto</Text>
 
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+        data={[1, 2]}
         keyExtractor={(list) => String(list)}
-        renderItem={() => <Text></Text>}
+        renderItem={() => (
+          <View style={styles.cardAllConsults}>
+            <View style={styles.bodyAllConsults}>
+              <Image
+                source={{
+                  uri: `https://api.adorable.io/avatars/285/${
+                    Math.random() * 100
+                  }.png`,
+                }}
+                style={styles.avatarAllConsults}
+              />
+              <View style={styles.textContainerAllConsults}>
+                <Text style={styles.doctorNameAllConsults}>
+                  Dr. Auzio da Silva
+                </Text>
+                <Text style={styles.doctorDataAllConsults}>
+                  31/05/2020 às 14:20h
+                </Text>
+              </View>
+            </View>
+            <TouchableOpacity>
+              <Feather name="info" color="#4F46BA" size={25} />
+            </TouchableOpacity>
+          </View>
+        )}
       />
     </View>
   );

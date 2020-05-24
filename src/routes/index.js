@@ -44,7 +44,7 @@ const ProfileStackScreen = () => (
           <Feather
             name="log-out"
             size={25}
-            color="#F9896B"
+            color="#4F46BA"
             style={{ marginRight: 20 }}
           />
         </TouchableOpacity>
@@ -75,7 +75,7 @@ const HistoricStackScreen = () => (
           <Feather
             name="log-out"
             size={25}
-            color="#F9896B"
+            color="#4F46BA"
             style={{ marginRight: 20 }}
           />
         </TouchableOpacity>
@@ -106,7 +106,7 @@ const ScheduleStackScreen = () => (
           <Feather
             name="log-out"
             size={25}
-            color="#F9896B"
+            color="#4F46BA"
             style={{ marginRight: 20 }}
           />
         </TouchableOpacity>
@@ -137,7 +137,7 @@ const ConsultStackScreen = () => (
           <Feather
             name="log-out"
             size={25}
-            color="#F9896B"
+            color="#4F46BA"
             style={{ marginRight: 20 }}
           />
         </TouchableOpacity>

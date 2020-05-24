@@ -11,7 +11,7 @@ export default StyleSheet.create({
     marginBottom: 10,
     fontWeight: "bold",
     fontSize: 18,
-    color: "#666",
+    color: "#555",
   },
   nextSchedule: {
     height: 180,
@@ -43,7 +43,7 @@ export default StyleSheet.create({
   bodyNextSchedule: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 10,
   },
@@ -64,11 +64,49 @@ export default StyleSheet.create({
   },
   footerTextNextSchedule: {
     marginBottom: 10,
-    color: '#F9896B',
+    color: "#4F46BA",
   },
   footerNextSchedule: {
     marginHorizontal: 10,
-    flexDirection: 'row',
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+
+  cardAllConsults: {
+    flexDirection: "row",
+    alignItems: "center",
     justifyContent: 'space-between',
-  }
+    marginVertical: 5,
+    height: 80,
+    marginHorizontal: 20,
+    paddingHorizontal: 10,
+    borderRadius: 10,
+    backgroundColor: "#FFF",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 5,
+  },
+  bodyAllConsults: {
+    flexDirection: "row",   
+    alignItems: "center",
+  },
+  avatarAllConsults: {
+    height: 50,
+    width: 50,
+    borderRadius: 15,
+  },
+  textContainerAllConsults: {
+    marginHorizontal: 10,
+  },
+  doctorDataAllConsults: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#F9896B",
+  },
+  doctorNameAllConsults: {
+    fontWeight: "bold",
+    color: '#555'
+  },
 });
