@@ -10,6 +10,7 @@ import Profile from "../pages/Profile";
 import Historic from "../pages/Historic";
 import Schedule from "../pages/Schedule";
 import Consult from "../pages/Consult";
+import Login from '../pages/Login';
 
 import logo from "../assets/logo.png";
 
@@ -23,7 +24,7 @@ const InitialStackScreen = () => (
     <AppStack.Screen
       name="Initial"
       options={{ title: "Initial" }}
-      component={Profile}
+      component={Login}
     />
   </AppStack.Navigator>
 );
@@ -206,7 +207,7 @@ const TabsNavigation = () => (
 );
 
 export default function Routes() {
-  const [showInitialPage, setShowInitialPage] = useState(false);
+  const [showInitialPage, setShowInitialPage] = useState(true);
 
   return (
     <NavigationContainer>

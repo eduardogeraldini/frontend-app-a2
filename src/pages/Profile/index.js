@@ -107,9 +107,9 @@ export default function Profile() {
       name: `photo.${fileType}`,
       type: `image/${fileType}`,
     });
-    formData.append('first_name', 'claire')
-    formData.append('last_name', 'bennet')
-    formData.append('email', 'bennet@gmail.com')
+    formData.append('first_name', 'Beatriz')
+    formData.append('last_name', 'Carvalho')
+    formData.append('email', 'carvalho@gmail.com')
     formData.append('password', '333333')
 
 
