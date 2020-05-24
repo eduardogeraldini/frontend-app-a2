@@ -11,7 +11,7 @@ export default StyleSheet.create({
     marginBottom: 10,
     fontWeight: "bold",
     fontSize: 18,
-    color: "#666",
+    color: "#555",
   },
   card: {
     flexDirection: "row",
