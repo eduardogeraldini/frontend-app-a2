@@ -1,31 +1,51 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
 import { Text, View, Image, TouchableOpacity, FlatList } from "react-native";
 import { Feather } from "@expo/vector-icons";
+import api from '../../services/api';
 
 import styles from "./styles";
 
 export default function Consult() {
+  const [data, setData] = useState([]);
+
+
+  useEffect(() => {
+    fetchData();
+  }, [])
+
+  async function fetchData() {
+    const res = await api.get('/alldocespec');
+
+    setData(res.data)
+
+  }
+
+  useEffect(() => {
+    console.log(data)
+  }, [data])
+
+
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Médicos</Text>
 
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+        data={data}
         keyExtractor={(list) => String(list)}
-        renderItem={() => (
+        renderItem={({ item }) => (
           <View style={styles.card}>
             <View style={styles.cardLeftSide}>
               <Image
                 source={{
-                  uri: "https://api.adorable.io/avatars/285/4.png",
+                  uri: `http://192.168.15.13:3000/files/${item.avatar_path}`
                 }}
                 style={styles.doctorAvatar}
               />
               <View style={styles.textContainer}>
-                <Text style={styles.doctorName}>Dr. Auzio da Silva</Text>
-                <Text style={styles.doctorDescription}>Clinico Geral</Text>
+                <Text style={styles.doctorName}>{item.first_name}</Text>
+                <Text style={styles.doctorDescription}>{item.title}</Text>
               </View>
             </View>
 
@@ -37,6 +57,7 @@ export default function Consult() {
             </View>
           </View>
         )}
+        keyExtractor={item => item.id.toString()}
       />
     </View>
   );
