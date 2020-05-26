@@ -59,7 +59,7 @@ export default StyleSheet.create({
     marginLeft: 10,
   },
   doctorDescriptionBodyNextSchedule: {
-    color: "#F9896B",
+    color: "#666",
     marginLeft: 10,
   },
   footerTextNextSchedule: {
@@ -103,10 +103,13 @@ export default StyleSheet.create({
   doctorDataAllConsults: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#F9896B",
+    color: "#777",
   },
   doctorNameAllConsults: {
     fontWeight: "bold",
     color: '#555'
   },
+  icons: {
+    marginRight: 10,
+  }
 });
