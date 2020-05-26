@@ -207,7 +207,7 @@ const TabsNavigation = () => (
 );
 
 export default function Routes() {
-  const [showInitialPage, setShowInitialPage] = useState(true);
+  const [showInitialPage, setShowInitialPage] = useState(false);
 
   return (
     <NavigationContainer>

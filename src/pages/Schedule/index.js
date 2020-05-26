@@ -1,11 +1,17 @@
 import React from "react";
 
-import { Text, View, FlatList, Image, TouchableOpacity } from "react-native";
+import { Text, View, FlatList, Image, TouchableOpacity, Linking } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
 import styles from "./styles";
 
 export default function Schedule() {
+
+
+  function callPhoneNmber(number) {
+    Linking.openURL(`tel:${number}`);
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Próxima consulta</Text>
@@ -36,7 +42,7 @@ export default function Schedule() {
               </Text>
             </View>
           </View>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => callPhoneNmber('19994521874')}>
             <Feather name="phone-call" color="#4F46BA" size={25} />
           </TouchableOpacity>
         </View>

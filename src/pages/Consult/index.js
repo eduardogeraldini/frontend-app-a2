@@ -8,7 +8,6 @@ import styles from "./styles";
 export default function Consult() {
   const [data, setData] = useState([]);
 
-
   useEffect(() => {
     fetchData();
   }, [])
@@ -33,13 +32,12 @@ export default function Consult() {
       <FlatList
         showsVerticalScrollIndicator={false}
         data={data}
-        keyExtractor={(list) => String(list)}
         renderItem={({ item }) => (
           <View style={styles.card}>
             <View style={styles.cardLeftSide}>
               <Image
                 source={{
-                  uri: `http://192.168.15.13:3000/files/${item.avatar_path}`
+                  uri: `http://localhost:3000/files/${item.avatar_path}`
                 }}
                 style={styles.doctorAvatar}
               />
