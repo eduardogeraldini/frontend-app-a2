@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Feather } from "@expo/vector-icons";
 
@@ -8,9 +8,14 @@ import Consult from "../../../pages/Consult";
 
 import logo from "../../../assets/logo.png";
 
+//Auth Context
+import { Context } from "../../../context/AuthContext";
+
 const AppStack = createStackNavigator();
 
 export default function ConsultStackScreen() {
+  const { handleLogout } = useContext(Context);
+
   return (
     <AppStack.Navigator
       screenOptions={{
@@ -23,7 +28,7 @@ export default function ConsultStackScreen() {
           />
         ),
         headerRight: () => (
-          <TouchableOpacity onPress={() => alert("Sair")}>
+          <TouchableOpacity onPress={() => handleLogout()}>
             <Feather
               name="log-out"
               size={25}

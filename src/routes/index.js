@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
@@ -11,8 +11,10 @@ import ConsultStackScreen from "../routes/Stacks/Consult";
 import AuthStackScreen from "../routes/Stacks/Auth";
 
 // Tab navigation
-
 const Tabs = createBottomTabNavigator();
+
+//Auth Context
+import { Context } from "./../context/AuthContext";
 
 const TabsNavigation = () => (
   <Tabs.Navigator
@@ -68,11 +70,11 @@ const TabsNavigation = () => (
 );
 
 export default function Routes() {
-  const [showAuthScreen, setShowAuthScreen] = useState(false);
+  const { authenticated } = useContext(Context);
 
   return (
     <NavigationContainer>
-      {showAuthScreen ? AuthStackScreen() : TabsNavigation()}
+      {authenticated ? TabsNavigation() : AuthStackScreen()}
     </NavigationContainer>
   );
 }

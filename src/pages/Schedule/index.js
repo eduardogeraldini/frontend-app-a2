@@ -1,6 +1,13 @@
 import React from "react";
 
-import { Text, View, FlatList, Image, TouchableOpacity, Linking } from "react-native";
+import {
+  Text,
+  View,
+  FlatList,
+  Image,
+  TouchableOpacity,
+  Linking,
+} from "react-native";
 import { Feather } from "@expo/vector-icons";
 
 import styles from "./styles";
@@ -41,8 +48,13 @@ export default function Schedule() {
               </Text>
             </View>
           </View>
-          <TouchableOpacity onPress={() => callPhoneNmber('19994521874')}>
-            <Feather style={styles.icons} name="phone-call" color="#4F46BA" size={25} />
+          <TouchableOpacity onPress={() => callPhoneNmber("19994521874")}>
+            <Feather
+              style={styles.icons}
+              name="phone-call"
+              color="#4F46BA"
+              size={25}
+            />
           </TouchableOpacity>
         </View>
         <TouchableOpacity style={styles.footerNextSchedule}>
@@ -80,7 +92,12 @@ export default function Schedule() {
               </View>
             </View>
             <TouchableOpacity>
-              <Feather style={styles.icons} name="info" color="#4F46BA" size={25} />
+              <Feather
+                style={styles.icons}
+                name="info"
+                color="#4F46BA"
+                size={25}
+              />
             </TouchableOpacity>
           </View>
         )}
