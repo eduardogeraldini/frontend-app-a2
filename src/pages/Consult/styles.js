@@ -51,7 +51,7 @@ export default StyleSheet.create({
     color: '#555'
   },
   doctorDescription: {
-    color: "#F9896B",
+    color: "#666",
   },
   iconContainer: {
     marginRight: 10,

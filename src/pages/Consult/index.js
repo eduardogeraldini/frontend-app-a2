@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Text, View, Image, TouchableOpacity, FlatList } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import api from '../../services/api';
+import api from "../../services/api";
 
 import styles from "./styles";
 
@@ -9,21 +9,14 @@ export default function Consult() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
+    async function fetchData() {
+      const res = await api.get("/alldocespec");
+
+      setData(res.data);
+    }
+
     fetchData();
-  }, [])
-
-  async function fetchData() {
-    const res = await api.get('/alldocespec');
-
-    setData(res.data)
-
-  }
-
-  useEffect(() => {
-    console.log(data)
-  }, [data])
-
-
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -37,12 +30,14 @@ export default function Consult() {
             <View style={styles.cardLeftSide}>
               <Image
                 source={{
-                  uri: `http://localhost:3000/files/${item.avatar_path}`
+                  uri: `http://192.168.0.105:3000/files/${item.avatar_path}`,
                 }}
                 style={styles.doctorAvatar}
               />
               <View style={styles.textContainer}>
-                <Text style={styles.doctorName}>{item.first_name}</Text>
+                <Text style={styles.doctorName}>
+                  {item.first_name + " " + item.last_name}
+                </Text>
                 <Text style={styles.doctorDescription}>{item.title}</Text>
               </View>
             </View>
@@ -55,7 +50,7 @@ export default function Consult() {
             </View>
           </View>
         )}
-        keyExtractor={item => item.id.toString()}
+        keyExtractor={(item) => item.id.toString()}
       />
     </View>
   );
