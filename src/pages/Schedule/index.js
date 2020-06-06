@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 import {
   Text,
@@ -13,6 +14,8 @@ import { Feather } from "@expo/vector-icons";
 import styles from "./styles";
 
 export default function Schedule() {
+
+  const navigation = useNavigation();
 
   function callPhoneNmber(number) {
     Linking.openURL(`tel:${number}`);

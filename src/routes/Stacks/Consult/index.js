@@ -5,6 +5,7 @@ import { Feather } from "@expo/vector-icons";
 import { Image, TouchableOpacity } from "react-native";
 
 import Consult from "../../../pages/Consult";
+import NewConsult from "../../../pages/NewConsult";
 
 import logo from "../../../assets/logo.png";
 
@@ -43,6 +44,11 @@ export default function ConsultStackScreen() {
         name="Consult"
         options={{ headerTitle: "" }}
         component={Consult}
+      />
+      <AppStack.Screen
+        name="NewConsult"
+        options={{ headerTitle: "" }}
+        component={NewConsult}
       />
     </AppStack.Navigator>
   );
