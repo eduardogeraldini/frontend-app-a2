@@ -6,6 +6,7 @@ const Context = createContext();
 
 function AuthProvider({ children }) {
   const [authenticated, setAuthenticated] = useState(false);
+  const [userId, setUserId] = useState(null);
 
   async function handleLogin(email, password) {
     try {
@@ -16,6 +17,7 @@ function AuthProvider({ children }) {
 
       if (data && status == 200) {
         setAuthenticated(true);
+        setUserId(data[0].id)
       }
     } catch (error) {
       setAuthenticated(false);
@@ -27,7 +29,7 @@ function AuthProvider({ children }) {
   }
 
   return (
-    <Context.Provider value={{ authenticated, handleLogin, handleLogout }}>
+    <Context.Provider value={{ authenticated, handleLogin, handleLogout, userId }}>
       {children}
     </Context.Provider>
   );

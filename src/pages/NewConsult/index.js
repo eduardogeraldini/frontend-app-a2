@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import {
@@ -8,16 +8,18 @@ import {
   TextInput,
   TouchableOpacity,
   Switch,
+  Alert,
 } from "react-native";
 
-import { Feather } from "@expo/vector-icons";
 import moment from "moment";
 import api from "../../services/api";
+import { Context } from "./../../context/AuthContext";
 
 import styles from "./styles";
 
 export default function NewConsult({ route }) {
-  const [avatar, setAvatar] = useState(null);
+  const { id, name, description, avatar_path } = route.params;
+
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [symptons, setSymptons] = useState("");
@@ -26,13 +28,17 @@ export default function NewConsult({ route }) {
   const [show, setShow] = useState(false);
 
   const navigation = useNavigation();
+  const { userId } = useContext(Context);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
 
-    if (mode == "date") setDate(currentDate);
-    else setTime(currentDate);
+    if (mode == "date") {
+      setDate(moment(currentDate).format("DD/MM/YYYY"));
+    } else {
+      setTime(moment(currentDate).format("HH:mm"));
+    }
   };
 
   const showMode = (currentMode) => {
@@ -50,13 +56,31 @@ export default function NewConsult({ route }) {
 
   const toggleSwitch = () => setIsOpen((previousState) => !previousState);
 
-  useEffect(() => {
-    async function fetchData() {
-      console.log(route.params);
-    }
+  async function handleNewConsult() {
 
-    fetchData();
-  }, []);
+    console.log(userId);
+
+    try {
+      const { data } = await api.post("/consultations", {
+        date,
+        time,
+        symptons,
+        isOpen,
+        doctor_id: id,
+        user_id: userId,
+      });
+
+      Alert.alert(
+        "Deu tudo certo!",
+        "A sua consulta foi agendada com sucesso."
+      );
+    } catch (error) {
+      Alert.alert(
+        "Ocorreu um erro!",
+        "Não foi possível agendar uma consulta, tente novamente mais tarde."
+      );
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -74,12 +98,12 @@ export default function NewConsult({ route }) {
       <View style={styles.userContainer}>
         <Image
           source={{
-            uri: route.params.avatar_path,
+            uri: avatar_path,
           }}
           style={styles.userAvatar}
         />
-        <Text style={styles.name}>{route.params.name}</Text>
-        <Text style={styles.description}>{route.params.description}</Text>
+        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.description}>{description}</Text>
       </View>
 
       <View style={styles.inputContainer}>
@@ -87,7 +111,7 @@ export default function NewConsult({ route }) {
         <TouchableOpacity onPress={showDatepicker}>
           <TextInput
             placeholder="Selecione uma data..."
-            value={date && moment(date).format("DD/MM/YYYY")}
+            value={date}
             style={styles.inputText}
             editable={false}
           />
@@ -99,7 +123,7 @@ export default function NewConsult({ route }) {
         <TouchableOpacity onPress={showTimepicker}>
           <TextInput
             placeholder="Selecione um horário..."
-            value={time && moment(time).format("HH:mm")}
+            value={time}
             style={styles.inputText}
             editable={false}
           />
@@ -122,7 +146,7 @@ export default function NewConsult({ route }) {
         <Switch onValueChange={toggleSwitch} value={isOpen} />
       </View>
 
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => handleNewConsult()}>
         <View
           style={{
             backgroundColor: "#4F46BA",
