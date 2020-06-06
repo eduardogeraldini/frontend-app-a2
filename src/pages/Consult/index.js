@@ -6,6 +6,8 @@ import api from "../../services/api";
 
 import styles from "./styles";
 
+const apiBase = 'https://consultai.herokuapp.com/files/';
+
 export default function Consult() {
   const navigation = useNavigation();
 
@@ -37,7 +39,7 @@ export default function Consult() {
             <View style={styles.cardLeftSide}>
               <Image
                 source={{
-                  uri: `http://192.168.0.105:3000/files/${item.avatar_path}`,
+                  uri: `${apiBase}${item.avatar_path}`,
                 }}
                 style={styles.doctorAvatar}
               />
@@ -57,7 +59,7 @@ export default function Consult() {
                     id: item.id,
                     name: item.first_name + " " + item.last_name,
                     description: item.title,
-                    avatar_path: `http://192.168.0.105:3000/files/${item.avatar_path}`,
+                    avatar_path: `${apiBase}${item.avatar_path}`,
                   })
                 }
               >
