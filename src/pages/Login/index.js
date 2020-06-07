@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Image, ActivityIndicator } from "react-native";
 
 import { Context } from "../../context/AuthContext";
 
@@ -9,7 +9,22 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { handleLogin } = useContext(Context);
+  const { handleLogin, loadingAuth } = useContext(Context);
+
+  
+  if (loadingAuth) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ActivityIndicator  size="large" />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>

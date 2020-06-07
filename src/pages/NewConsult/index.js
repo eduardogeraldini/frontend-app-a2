@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { AppLoading } from "expo";
 import {
   Text,
   View,
@@ -9,6 +10,7 @@ import {
   TouchableOpacity,
   Switch,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 
 import moment from "moment";
@@ -20,6 +22,7 @@ import styles from "./styles";
 export default function NewConsult({ route }) {
   const { id, name, description, avatar_path } = route.params;
 
+  const [loading, setLoading] = useState(false);
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [symptons, setSymptons] = useState("");
@@ -57,8 +60,7 @@ export default function NewConsult({ route }) {
   const toggleSwitch = () => setIsOpen((previousState) => !previousState);
 
   async function handleNewConsult() {
-
-    console.log(userId);
+    setLoading(true);
 
     try {
       const { data } = await api.post("/consultations", {
@@ -79,7 +81,23 @@ export default function NewConsult({ route }) {
         "Ocorreu um erro!",
         "Não foi possível agendar uma consulta, tente novamente mais tarde."
       );
+    } finally {
+      setLoading(false);
     }
+  }
+
+  if (loading) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ActivityIndicator  size="large" />
+      </View>
+    );
   }
 
   return (
