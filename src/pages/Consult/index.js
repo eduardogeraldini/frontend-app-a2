@@ -1,23 +1,42 @@
 import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { Text, View, Image, TouchableOpacity, FlatList } from "react-native";
+import {
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  FlatList,
+  ActivityIndicator,
+  Alert,
+} from "react-native";
 import { Feather } from "@expo/vector-icons";
 import api from "../../services/api";
 
 import styles from "./styles";
 
-const apiBase = 'https://consultai.herokuapp.com/files/';
+const apiBase = "https://consultai.herokuapp.com/files/";
 
 export default function Consult() {
   const navigation = useNavigation();
 
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
-      const res = await api.get("/alldocespec");
+      setLoading(true);
+      try {
+        const res = await api.get("/alldocespec");
 
-      setData(res.data);
+        setData(res.data);
+      } catch (error) {
+        Alert.alert(
+          "Ocorreu um erro!",
+          "Não foi possível carregar as informações, tente novamente mais tarde."
+        );
+      } finally {
+        setLoading(false);
+      }
     }
 
     fetchData();
@@ -25,6 +44,20 @@ export default function Consult() {
 
   function navigateToNewConsult(params) {
     navigation.push("NewConsult", params);
+  }
+
+  if (loading) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ActivityIndicator size="large" />
+      </View>
+    );
   }
 
   return (
