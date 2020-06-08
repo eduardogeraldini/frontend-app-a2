@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 import {
@@ -8,17 +8,57 @@ import {
   Image,
   TouchableOpacity,
   Linking,
+  Alert,
+  ActivityIndicator
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
+import api from "../../services/api";
 
 import styles from "./styles";
 
 export default function Schedule() {
-
   const navigation = useNavigation();
+
+  const [consultationsOpened, setConsultationsOpened] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  //PRECISA CORRIGIR o BACK END
+  useEffect(() => {
+    async function fetchData() {
+      setLoading(true);
+      try {
+        const res = await api.get("/consultations");
+
+        setConsultationsOpened(res.data.filter(consult => (consult.isOpen == 1)));
+      } catch (error) {
+        Alert.alert(
+          "Ocorreu um erro!",
+          "Não foi possível carregar as informações, tente novamente mais tarde."
+        );
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   function callPhoneNmber(number) {
     Linking.openURL(`tel:${number}`);
+  }
+
+  if (loading) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ActivityIndicator size="large" />
+      </View>
+    );
   }
 
   return (
@@ -72,9 +112,9 @@ export default function Schedule() {
 
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={[1, 2]}
-        keyExtractor={(list) => String(list)}
-        renderItem={() => (
+        data={consultationsOpened}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({item}) => (
           <View style={styles.cardAllConsults}>
             <View style={styles.bodyAllConsults}>
               <Image
@@ -90,7 +130,7 @@ export default function Schedule() {
                   Dr. Auzio da Silva
                 </Text>
                 <Text style={styles.doctorDataAllConsults}>
-                  31/05/2020 às 14:20h
+                  {item.date} às {item.time}h
                 </Text>
               </View>
             </View>
