@@ -17,6 +17,8 @@ import { Context } from "./../../context/AuthContext";
 
 import styles from "./styles";
 
+const apiBase = "https://consultai.herokuapp.com/files/";
+
 export default function Schedule() {
   const navigation = useNavigation();
   const { userId } = useContext(Context);
@@ -28,9 +30,9 @@ export default function Schedule() {
     async function fetchData() {
       setLoading(true);
       try {
-        const { data } = await api.get(`/consult/${userId}`);
+        const { data } = await api.get(`consult/${userId}`);
 
-        console.log(data);
+        console.log(userId);
         if (!data.message) {
           setConsultationsOpened(data.filter((consult) => consult.isOpen == 0));
         }
@@ -133,7 +135,7 @@ export default function Schedule() {
             <View style={styles.cardAllConsults}>
               <View style={styles.bodyAllConsults}>
                 <Image
-                  source={item.avatar_path}
+                  source={{ uri: `${apiBase}${item.avatar_path}` }}
                   style={styles.avatarAllConsults}
                 />
                 <View style={styles.textContainerAllConsults}>
