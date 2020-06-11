@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 import {
@@ -9,27 +9,31 @@ import {
   TouchableOpacity,
   Linking,
   Alert,
-  ActivityIndicator
+  ActivityIndicator,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import api from "../../services/api";
+import { Context } from "./../../context/AuthContext";
 
 import styles from "./styles";
 
 export default function Schedule() {
   const navigation = useNavigation();
+  const { userId } = useContext(Context);
 
   const [consultationsOpened, setConsultationsOpened] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  //PRECISA CORRIGIR o BACK END
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
       try {
-        const res = await api.get("/consultations");
+        const { data } = await api.get(`/consult/${userId}`);
 
-        setConsultationsOpened(res.data.filter(consult => (consult.isOpen == 1)));
+        console.log(data);
+        if (!data.message) {
+          setConsultationsOpened(data.filter((consult) => consult.isOpen == 0));
+        }
       } catch (error) {
         Alert.alert(
           "Ocorreu um erro!",
@@ -110,41 +114,49 @@ export default function Schedule() {
 
       <Text style={styles.title}>Consultas em aberto</Text>
 
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        data={consultationsOpened}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({item}) => (
-          <View style={styles.cardAllConsults}>
-            <View style={styles.bodyAllConsults}>
-              <Image
-                source={{
-                  uri: `https://api.adorable.io/avatars/285/${
-                    Math.random() * 100
-                  }.png`,
-                }}
-                style={styles.avatarAllConsults}
-              />
-              <View style={styles.textContainerAllConsults}>
-                <Text style={styles.doctorNameAllConsults}>
-                  Dr. Auzio da Silva
-                </Text>
-                <Text style={styles.doctorDataAllConsults}>
-                  {item.date} às {item.time}h
-                </Text>
+      {consultationsOpened.length == 0 && (
+        <View style={styles.notFoundContainer}>
+          <Image
+            source={require("../../assets/not_found.png")}
+            resizeMode="contain"
+            style={{ width: 300, height: 300 }}
+          />
+        </View>
+      )}
+
+      {consultationsOpened.length > 0 && (
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          data={consultationsOpened}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <View style={styles.cardAllConsults}>
+              <View style={styles.bodyAllConsults}>
+                <Image
+                  source={item.avatar_path}
+                  style={styles.avatarAllConsults}
+                />
+                <View style={styles.textContainerAllConsults}>
+                  <Text style={styles.doctorNameAllConsults}>
+                    {item.first_name} {item.last_name}
+                  </Text>
+                  <Text style={styles.doctorDataAllConsults}>
+                    {item.date} às {item.time}h
+                  </Text>
+                </View>
               </View>
+              <TouchableOpacity>
+                <Feather
+                  style={styles.icons}
+                  name="info"
+                  color="#4F46BA"
+                  size={25}
+                />
+              </TouchableOpacity>
             </View>
-            <TouchableOpacity>
-              <Feather
-                style={styles.icons}
-                name="info"
-                color="#4F46BA"
-                size={25}
-              />
-            </TouchableOpacity>
-          </View>
-        )}
-      />
+          )}
+        />
+      )}
     </View>
   );
 }

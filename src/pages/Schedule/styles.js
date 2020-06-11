@@ -111,5 +111,10 @@ export default StyleSheet.create({
   },
   icons: {
     marginRight: 10,
+  },
+  notFoundContainer: {
+    flex: 1,
+    alignItems:'center',
+    justifyContent: 'center'
   }
 });
