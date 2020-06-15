@@ -12,8 +12,8 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   userAvatar: {
-    width: 60,
-    height: 60,
+    width: 90,
+    height: 90,
     borderRadius: 30,
   },
   name: {

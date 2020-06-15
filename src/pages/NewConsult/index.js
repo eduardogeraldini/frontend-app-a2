@@ -26,7 +26,7 @@ export default function NewConsult({ route }) {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [symptons, setSymptons] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
 

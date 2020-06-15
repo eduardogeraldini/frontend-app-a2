@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   Text,
@@ -15,22 +15,30 @@ import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
 
 import api from "../../services/api";
+import { Context } from "./../../context/AuthContext";
 
 import styles from "./styles";
 
+
+const apiBase = "https://consultai.herokuapp.com/"
+
 export default function Profile() {
-  const [avatar, setAvatar] = useState(null);
-  const [image, setImage] = useState(null);
+  const [first_name, setFirst_name] = useState('');
+  const [last_name, setLast_name] = useState('');
+  const [email, setEmail] = useState('');
+  const [avatar, setAvatar] = useState('');
+  const [changedPhoto, setChangedPhoto] = useState(false);
+  const { userId } = useContext(Context);
 
   const navigation = useNavigation();
 
-  async function listAll() {
-    api.get("/users").then(function (response) {
-      console.log(response.data);
-      console.log(response.status);
-      console.log(response.statusText);
-      console.log(response.headers);
-      console.log(response.config);
+  async function listUserData() {
+    api.get(`/users/${userId}/profile`).then(function (response) {
+      console.log(response.data[0].avatar_path);
+      setFirst_name(response.data[0].first_name);
+      setLast_name(response.data[0].last_name);
+      setEmail(response.data[0].email);
+      setAvatar(response.data[0].avatar_path)
     });
   }
 
@@ -43,8 +51,8 @@ export default function Profile() {
         quality: 1,
       });
       if (!result.cancelled) {
-        setAvatar(result.uri);
-        _handleImagePicked(result);
+        setAvatar(result.uri)
+        setChangedPhoto(true);
       }
       console.log(result);
     } catch (E) {
@@ -53,7 +61,9 @@ export default function Profile() {
   }
 
   useEffect(() => {
+    listUserData();
     getPermissionAsync();
+
   }, []);
 
   async function getPermissionAsync() {
@@ -67,24 +77,23 @@ export default function Profile() {
     }
   }
 
-  async function _handleImagePicked(pickerResult) {
-    let uploadResponse, uploadResult;
+  // async function handleChange(uri) {
+  //   let uploadResponse, uploadResult;
 
-    try {
-      if (!pickerResult.cancelled) {
-        uploadResponse = await uploadImageAsync(pickerResult.uri);
-        if (uploadResponse.status === 200) {
-          alert("Foto alterada com sucesso");
-        }
-      }
-    } catch (e) {
-      console.log({ uploadResponse });
-      console.log(e);
-      alert("Erro ao salvar imagem no banco de dados:(");
-    }
-  }
+  //   try {
+  //       uploadResponse = await uploadImageAsync(uri);
+  //       if (uploadResponse.status === 200) {
+  //         alert("Foto alterada com sucesso");
+        
+  //     }
+  //   } catch (e) {
+  //     console.log({ uploadResponse });
+  //     console.log(e);
+  //     alert("Erro ao salvar imagem no banco de dados:(");
+  //   }
+  // }
 
-  async function uploadImageAsync(uri) {
+  async function handleChange(uri) {
     let uriParts = uri.split(".");
     let fileType = uriParts[uriParts.length - 1];
 
@@ -95,10 +104,11 @@ export default function Profile() {
       name: `photo.${fileType}`,
       type: `image/${fileType}`,
     });
-    formData.append("first_name", "claire");
-    formData.append("last_name", "bennet");
-    formData.append("email", "bennet@gmail.com");
-    formData.append("password", "333333");
+    formData.append("first_name",first_name);
+    formData.append("last_name",last_name);
+    formData.append("email", email);
+    formData.append("id", userId);
+    formData.append("changedPhoto", changedPhoto);
 
     let options = {
       headers: {
@@ -106,7 +116,7 @@ export default function Profile() {
       },
     };
 
-    return await api.post("/users", formData, options);
+    return await api.put("/user", formData, options);
   }
 
   return (
@@ -114,32 +124,47 @@ export default function Profile() {
       <View style={styles.userContainer}>
         <Image
           source={{
-            uri: avatar,
+            uri: avatar.includes('file://') ? `${avatar}` : `${apiBase}${avatar}`,
           }}
           style={styles.userAvatar}
         />
         <TouchableOpacity onPress={() => _pickImage()}>
-          <Text style={styles.name}>Monica Wood</Text>
+          <Text style={styles.name}>{first_name} {last_name}</Text>
         </TouchableOpacity>
         <Text style={styles.description}>Pacient</Text>
       </View>
 
       <View style={styles.inputContainer}>
         <Text style={styles.inputLabel}>Nome</Text>
-        <TextInput placeholder="Ex: João" style={styles.inputText} />
+        <TextInput
+          value={first_name}
+          placeholder="Ex: João"
+          onChangeText={txt => setFirst_name(txt)}
+          style={styles.inputText} />
       </View>
 
       <View style={styles.inputContainer}>
         <Text style={styles.inputLabel}>Sobrenome</Text>
-        <TextInput placeholder="Ex: Silva" style={styles.inputText} />
+        <TextInput
+          value={last_name}
+          placeholder="Ex: Silva"
+          onChangeText={txt => setLast_name(txt)}
+          style={styles.inputText} />
       </View>
 
       <View style={styles.inputContainer}>
         <Text style={styles.inputLabel}>E-Mail</Text>
-        <TextInput placeholder="Ex: email@email.com" style={styles.inputText} />
+        <TextInput
+          value={email}
+          placeholder="Ex: email@email.com"
+          onChangeText={txt => setEmail(txt)}
+          style={styles.inputText} />
       </View>
 
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => handleChange(avatar)}
+        disabled={avatar.includes('file://') ? false :true}
+      >
         <View
           style={{
             backgroundColor: "#4F46BA",

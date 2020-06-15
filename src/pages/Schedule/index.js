@@ -30,11 +30,11 @@ export default function Schedule() {
     async function fetchData() {
       setLoading(true);
       try {
-        const { data } = await api.get(`consult/${userId}`);
+        const { data } = await api.get(`/users/${userId}/consults`);
 
         console.log(userId);
         if (!data.message) {
-          setConsultationsOpened(data.filter((consult) => consult.isOpen == 0));
+          setConsultationsOpened(data.filter((consult) => consult.isOpen == 1));
         }
       } catch (error) {
         Alert.alert(
@@ -47,7 +47,7 @@ export default function Schedule() {
     }
 
     fetchData();
-  }, []);
+  }, [userId]);
 
   function callPhoneNmber(number) {
     Linking.openURL(`tel:${number}`);
