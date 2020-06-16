@@ -89,7 +89,8 @@ export default function Consult() {
                 style={styles.iconContainer}
                 onPress={() =>
                   navigateToNewConsult({
-                    id: item.id,
+                    spec_id: item.spec_id,
+                    doctor_id: item.doctor_id,
                     name: item.first_name + " " + item.last_name,
                     description: item.title,
                     avatar_path: `${apiBase}${item.avatar_path}`,
@@ -102,7 +103,7 @@ export default function Consult() {
             </View>
           </View>
         )}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item.spec_id.toString()}
       />
     </View>
   );

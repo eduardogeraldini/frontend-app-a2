@@ -32,9 +32,8 @@ export default function Schedule() {
       try {
         const { data } = await api.get(`/users/${userId}/consults`);
 
-        console.log(userId);
         if (!data.message) {
-          setConsultationsOpened(data.filter((consult) => consult.isOpen == 1));
+          setConsultationsOpened(data.filter((consult) => consult.isOpen == 0));
         }
       } catch (error) {
         Alert.alert(

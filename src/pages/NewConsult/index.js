@@ -20,13 +20,13 @@ import { Context } from "./../../context/AuthContext";
 import styles from "./styles";
 
 export default function NewConsult({ route }) {
-  const { id, name, description, avatar_path } = route.params;
+  const { spec_id, doctor_id, name, description, avatar_path } = route.params;
 
   const [loading, setLoading] = useState(false);
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [symptons, setSymptons] = useState("");
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
 
@@ -68,7 +68,7 @@ export default function NewConsult({ route }) {
         time,
         symptons,
         isOpen,
-        doctor_id: id,
+        doctor_id: doctor_id,
         user_id: userId,
       });
 
