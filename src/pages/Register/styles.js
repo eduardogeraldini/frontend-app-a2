@@ -8,9 +8,7 @@ export default StyleSheet.create({
   },
 
   userContainer: {
-    marginTop: 20,
-    flexDirection: "column",
-    alignItems: "center",
+    marginTop: -40,
   },
 
   userAvatar: {

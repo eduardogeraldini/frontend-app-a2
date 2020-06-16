@@ -80,19 +80,19 @@ export default function Register() {
           style={{ width: 300, height: 60 }}
         />
       </View>
+
+      <View style={styles.userContainer}>
+        <TouchableOpacity onPress={() => _pickImage()}>
+          <Image
+            source={{
+              uri: avatar.includes('file://') ? `${avatar}` : `https://static.thenounproject.com/png/212328-200.png`,
+            }}
+            style={styles.userAvatar}
+          />
+        </TouchableOpacity>
+      </View>
+
       <View style={styles.InputsView}>
-
-        <View style={styles.userContainer}>
-          <TouchableOpacity onPress={() => _pickImage()}>
-            <Image
-              source={{
-                uri: avatar.includes('file://') ? `${avatar}` : `https://static.thenounproject.com/png/212328-200.png`,
-              }}
-              style={styles.userAvatar}
-            />
-          </TouchableOpacity>
-        </View>
-
         <TextInput
           placeholder="Seu primeiro nome"
           style={styles.txtInput}
