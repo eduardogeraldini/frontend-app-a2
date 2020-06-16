@@ -20,7 +20,7 @@ import { Context } from "./../../context/AuthContext";
 import styles from "./styles";
 
 
-const apiBase = "https://consultai.herokuapp.com/"
+const apiBase = "https://consultai.herokuapp.com/files/"
 
 export default function Profile() {
   const [first_name, setFirst_name] = useState('');
@@ -38,7 +38,7 @@ export default function Profile() {
       setFirst_name(response.data[0].first_name);
       setLast_name(response.data[0].last_name);
       setEmail(response.data[0].email);
-      setAvatar(response.data[0].avatar_path)
+      setAvatar(response.data[0].avatar_path);
     });
   }
 

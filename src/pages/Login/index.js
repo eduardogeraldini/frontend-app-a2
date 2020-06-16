@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { useNavigation } from "@react-navigation/native";
 import { View, Text, TextInput, TouchableOpacity, Image, ActivityIndicator } from "react-native";
 
 import { Context } from "../../context/AuthContext";
@@ -6,11 +7,16 @@ import { Context } from "../../context/AuthContext";
 import styles from "./styles";
 
 export default function Login() {
+  const navigation = useNavigation();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const { handleLogin, loadingAuth } = useContext(Context);
 
+  const toRegister = () => {
+    navigation.navigate("Register");
+  };
   
   if (loadingAuth) {
     return (
@@ -61,8 +67,8 @@ export default function Login() {
         >
           <Text style={styles.btnTxt}>Entrar</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => false} style={styles.signUpBtn}>
-          <Text style={styles.btnTxt}>Criar conta</Text>
+        <TouchableOpacity onPress={toRegister} style={styles.signUpBtn}>
+          <Text style={styles.btnTxt}>Criar Conta</Text>
         </TouchableOpacity>
       </View>
     </View>
