@@ -12,9 +12,9 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   userAvatar: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
+    width: 80,
+    height: 80,
+    borderRadius: 10,
   },
   name: {
     fontSize: 20,
@@ -42,7 +42,7 @@ export default StyleSheet.create({
   },
   inputTextArea: {
     color: "#666",
-    height: 100,
+    height: 50,
     borderColor: "#8A8284",
     textAlignVertical: 'top',
     paddingTop: 10,

@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   Switch,
   Alert,
+  ScrollView,
   ActivityIndicator,
 } from "react-native";
 
@@ -36,6 +37,7 @@ export default function NewConsult({ route }) {
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
+
 
     if (mode == "date") {
       setDate(moment(currentDate).format("DD/MM/YYYY"));
@@ -76,6 +78,8 @@ export default function NewConsult({ route }) {
         "Deu tudo certo!",
         "A sua consulta foi agendada com sucesso."
       );
+
+      navigation.push("Consult");
     } catch (error) {
       Alert.alert(
         "Ocorreu um erro!",
@@ -101,7 +105,7 @@ export default function NewConsult({ route }) {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
@@ -171,7 +175,7 @@ export default function NewConsult({ route }) {
             height: 50,
             marginHorizontal: 20,
             borderRadius: 10,
-            marginTop: 50,
+            marginTop: 30,
             justifyContent: "center",
             alignItems: "center",
           }}
@@ -181,6 +185,6 @@ export default function NewConsult({ route }) {
           </Text>
         </View>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 }

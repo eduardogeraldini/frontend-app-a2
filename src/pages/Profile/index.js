@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
+  ScrollView
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
@@ -120,7 +121,7 @@ export default function Profile() {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.userContainer}>
         <Image
           source={{
@@ -181,6 +182,6 @@ export default function Profile() {
           </Text>
         </View>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 }
