@@ -40,4 +40,10 @@ export default StyleSheet.create({
     borderColor: "#8A8284",
     borderBottomWidth: 1,
   },
+
+  changePic: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: 'purple'
+  }
 });

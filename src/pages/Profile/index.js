@@ -84,7 +84,7 @@ export default function Profile() {
   //       uploadResponse = await uploadImageAsync(uri);
   //       if (uploadResponse.status === 200) {
   //         alert("Foto alterada com sucesso");
-        
+
   //     }
   //   } catch (e) {
   //     console.log({ uploadResponse });
@@ -104,8 +104,8 @@ export default function Profile() {
       name: `photo.${fileType}`,
       type: `image/${fileType}`,
     });
-    formData.append("first_name",first_name);
-    formData.append("last_name",last_name);
+    formData.append("first_name", first_name);
+    formData.append("last_name", last_name);
     formData.append("email", email);
     formData.append("id", userId);
     formData.append("changedPhoto", changedPhoto);
@@ -129,9 +129,9 @@ export default function Profile() {
           style={styles.userAvatar}
         />
         <TouchableOpacity onPress={() => _pickImage()}>
-          <Text style={styles.name}>{first_name} {last_name}</Text>
+          <Text style={styles.changePic}>Mudar foto</Text>
         </TouchableOpacity>
-        <Text style={styles.description}>Pacient</Text>
+          <Text style={styles.name}>{first_name} {last_name}</Text>
       </View>
 
       <View style={styles.inputContainer}>
@@ -163,7 +163,7 @@ export default function Profile() {
 
       <TouchableOpacity
         onPress={() => handleChange(avatar)}
-        disabled={avatar.includes('file://') ? false :true}
+        disabled={avatar.includes('file://') ? false : true}
       >
         <View
           style={{
