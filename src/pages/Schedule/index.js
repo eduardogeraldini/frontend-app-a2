@@ -46,7 +46,7 @@ export default function Schedule() {
     }
 
     fetchData();
-  }, [userId]);
+  }, []);
 
   function callPhoneNmber(number) {
     Linking.openURL(`tel:${number}`);

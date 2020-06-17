@@ -1,7 +1,12 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
+
+import {
+  View,
+  ActivityIndicator
+} from "react-native";
 
 // Stacks screens
 import ProfileStackScreen from "../routes/Stacks/Profile";
@@ -70,7 +75,21 @@ const TabsNavigation = () => (
 );
 
 export default function Routes() {
-  const { authenticated } = useContext(Context);
+  const { authenticated, loadingAuth } = useContext(Context);
+
+  if (loadingAuth) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
 
   return (
     <NavigationContainer>
