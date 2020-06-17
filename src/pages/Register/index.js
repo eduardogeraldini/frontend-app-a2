@@ -89,6 +89,7 @@ export default function Register() {
             }}
             style={styles.userAvatar}
           />
+          <Text style={{ textAlign: 'center'}}>Escolher foto</Text>
         </TouchableOpacity>
       </View>
 
