@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { View, Text, TextInput, TouchableOpacity, Image, ActivityIndicator } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Image, ActivityIndicator, Alert} from "react-native";
 
 import * as ImagePicker from "expo-image-picker";
 import Constants from "expo-constants";
@@ -20,6 +20,18 @@ export default function Register() {
   const [password, setPassword] = useState("");
 
   const { handleCreate, loadingCreate } = useContext(Context);
+
+
+  function handleCreateAccount(){
+    if(avatar == ''){
+      Alert.alert("Oops!",
+      "Tem certeza que preencheu os campos e escolheu uma foto?!")
+
+      return
+    }
+
+    handleCreate(avatar, firstName, lastName, email, password)
+  }
 
   async function _pickImage() {
     try {
@@ -126,7 +138,7 @@ export default function Register() {
       </View>
       <View style={styles.InputsBtns}>
         <TouchableOpacity
-          onPress={() => handleCreate(avatar, firstName, lastName, email, password)}
+          onPress={() => handleCreateAccount()}
           style={styles.signInBtn}
         >
           <Text style={styles.btnTxt}>Criar Conta</Text>
