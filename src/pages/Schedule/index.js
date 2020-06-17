@@ -26,25 +26,26 @@ export default function Schedule() {
   const [consultationsOpened, setConsultationsOpened] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    async function fetchData() {
-      setLoading(true);
-      try {
-        const { data } = await api.get(`/users/${userId}/consults`);
+  async function fetchData() {
+    setLoading(true);
+    try {
+      const { data } = await api.get(`/users/${userId}/consults`);
 
-        if (!data.message) {
-          setConsultationsOpened(data.filter((consult) => consult.isOpen == 0));
-        }
-
-      } catch (error) {
-        Alert.alert(
-          "Ocorreu um erro!",
-          "Não foi possível carregar as informações, tente novamente mais tarde."
-        );
-      } finally {
-        setLoading(false);
+      if (!data.message) {
+        setConsultationsOpened(data.filter((consult) => consult.isOpen == 0));
       }
+
+    } catch (error) {
+      Alert.alert(
+        "Ocorreu um erro!",
+        "Não foi possível carregar as informações, tente novamente mais tarde."
+      );
+    } finally {
+      setLoading(false);
     }
+  }
+
+  useEffect(() => {
 
     fetchData();
   }, []);
@@ -62,13 +63,18 @@ export default function Schedule() {
           alignItems: "center",
         }}
       >
-        <ActivityIndicator size="large" />
+        <ActivityIndicator color='#F9896B' size="large" />
       </View>
     );
   }
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity
+        onPress={() => fetchData()}
+      >
+        <Text style={{ color: '#F9896B', textAlign: 'center', paddingTop: 10 }}>Atualizar</Text>
+      </TouchableOpacity>
       <Text style={styles.title}>Próxima consulta</Text>
 
       {consultationsOpened.length == 0 && (
