@@ -21,7 +21,7 @@
     "expo-image-picker": "~8.0.1",
     "expo-linking": "^1.0.1",
     "expo-mail-composer": "~8.0.0",
-    "moment": "^2.26.0",
+    "moment": "^2.29.2",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
